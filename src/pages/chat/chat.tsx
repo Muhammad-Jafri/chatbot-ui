@@ -1,72 +1,71 @@
 import { ChatInput } from "@/components/custom/chatinput";
 import { PreviewMessage, ThinkingMessage } from "../../components/custom/message";
 import { useScrollToBottom } from '@/components/custom/use-scroll-to-bottom';
-import { useState, useRef } from "react";
-import { message } from "../../interfaces/interfaces"
+import { useState, useRef, useEffect } from "react";
+import { message } from "../../interfaces/interfaces";
 import { Overview } from "@/components/custom/overview";
 import { Header } from "@/components/custom/header";
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
-const socket = new WebSocket("ws://localhost:8090"); //change to your websocket endpoint
+const post_endpoint = "/agent/chat";; // API endpoint for chat
 
 export function Chat() {
   const [messagesContainerRef, messagesEndRef] = useScrollToBottom<HTMLDivElement>();
   const [messages, setMessages] = useState<message[]>([]);
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [conversationId, setConversationId] = useState<string>(uuidv4()); // Generate conversation ID on component mount
 
-  const messageHandlerRef = useRef<((event: MessageEvent) => void) | null>(null);
+  async function handleSubmit(text?: string) {
+    if (isLoading) return;
 
-  const cleanupMessageHandler = () => {
-    if (messageHandlerRef.current && socket) {
-      socket.removeEventListener("message", messageHandlerRef.current);
-      messageHandlerRef.current = null;
-    }
-  };
-
-async function handleSubmit(text?: string) {
-  if (!socket || socket.readyState !== WebSocket.OPEN || isLoading) return;
-
-  const messageText = text || question;
-  setIsLoading(true);
-  cleanupMessageHandler();
-  
-  const traceId = uuidv4();
-  setMessages(prev => [...prev, { content: messageText, role: "user", id: traceId }]);
-  socket.send(messageText);
-  setQuestion("");
-
-  try {
-    const messageHandler = (event: MessageEvent) => {
-      setIsLoading(false);
-      if(event.data.includes("[END]")) {
-        return;
+    const messageText = text || question;
+    if (!messageText.trim()) return;
+    
+    setIsLoading(true);
+    
+    const traceId = uuidv4(); // Generate unique ID for this message pair
+    
+    // Add user message to the state immediately
+    setMessages(prev => [...prev, { content: messageText, role: "user", id: traceId }]);
+    setQuestion(""); // Clear input field
+    
+    try {
+      // Make API request
+      const response = await fetch(post_endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: messageText,
+          conversation_id: conversationId
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      setMessages(prev => {
-        const lastMessage = prev[prev.length - 1];
-        const newContent = lastMessage?.role === "assistant" 
-          ? lastMessage.content + event.data 
-          : event.data;
-        
-        const newMessage = { content: newContent, role: "assistant", id: traceId };
-        return lastMessage?.role === "assistant"
-          ? [...prev.slice(0, -1), newMessage]
-          : [...prev, newMessage];
-      });
-
-      if (event.data.includes("[END]")) {
-        cleanupMessageHandler();
-      }
-    };
-
-    messageHandlerRef.current = messageHandler;
-    socket.addEventListener("message", messageHandler);
-  } catch (error) {
-    console.error("WebSocket error:", error);
-    setIsLoading(false);
+      const data = await response.json();
+      
+      // Add assistant's response to messages
+      setMessages(prev => [
+        ...prev, 
+        { content: data.bot, role: "assistant", id: traceId }
+      ]);
+      
+    } catch (error) {
+      console.error("API request error:", error);
+      // Optionally add an error message to the chat
+      setMessages(prev => [
+        ...prev, 
+        { content: "Sorry, there was an error processing your request.", role: "assistant", id: traceId }
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   }
-}
 
   return (
     <div className="flex flex-col min-w-0 h-dvh bg-background">
@@ -89,4 +88,4 @@ async function handleSubmit(text?: string) {
       </div>
     </div>
   );
-};
+}
