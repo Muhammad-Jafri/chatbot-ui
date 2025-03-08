@@ -1,20 +1,20 @@
 import { ChatInput } from "@/components/custom/chatinput";
 import { PreviewMessage, ThinkingMessage } from "../../components/custom/message";
 import { useScrollToBottom } from '@/components/custom/use-scroll-to-bottom';
-import { useState, useRef, useEffect } from "react";
+import { useState} from "react";
 import { message } from "../../interfaces/interfaces";
 import { Overview } from "@/components/custom/overview";
 import { Header } from "@/components/custom/header";
 import { v4 as uuidv4 } from 'uuid';
 
-const post_endpoint = import.meta.env.VITE_BOT_ENDPOINT || '/agent/chat'; // TODO resolve the endpoint issue
+const post_endpoint = 'http://13.60.243.186:8000/agent/chat'; // TODO resolve the endpoint issue
 
 export function Chat() {
   const [messagesContainerRef, messagesEndRef] = useScrollToBottom<HTMLDivElement>();
   const [messages, setMessages] = useState<message[]>([]);
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [conversationId, setConversationId] = useState<string>(uuidv4()); // Generate conversation ID on component mount
+  const [conversationId] = useState<string>(uuidv4()); // Generate conversation ID on component mount
 
   async function handleSubmit(text?: string) {
     if (isLoading) return;
