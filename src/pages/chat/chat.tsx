@@ -7,7 +7,7 @@ import { Overview } from "@/components/custom/overview";
 import { Header } from "@/components/custom/header";
 import { v4 as uuidv4 } from 'uuid';
 
-const post_endpoint = "/agent/chat";; // API endpoint for chat TODO need to put this into an env
+const post_endpoint = import.meta.env.VITE_BOT_ENDPOINT || '/agent/chat'; // TODO resolve the endpoint issue
 
 export function Chat() {
   const [messagesContainerRef, messagesEndRef] = useScrollToBottom<HTMLDivElement>();
