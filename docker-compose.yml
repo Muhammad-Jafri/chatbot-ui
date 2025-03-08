@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BOT_ENDPOINT=${BOT_ENDPOINT:-http://localhost:8000/agent/chat}
+    ports:
+      - "3000:80"
+    env_file:
+      - .env
+    # For development - uncomment these lines for hot reloading
+    # volumes:
+    #   - ./src:/app/src:ro
+    #   - ./public:/app/public:ro
