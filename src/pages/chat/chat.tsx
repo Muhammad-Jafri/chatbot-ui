@@ -7,7 +7,7 @@ import { Overview } from "@/components/custom/overview";
 import { Header } from "@/components/custom/header";
 import { v4 as uuidv4 } from 'uuid';
 
-const post_endpoint = 'https://13.60.243.186/agent/chat'; // TODO resolve the endpoint issue
+const post_endpoint = 'https://lunabotai.duckdns.org/agent/chat'; // TODO resolve the endpoint issue
 
 export function Chat() {
   const [messagesContainerRef, messagesEndRef] = useScrollToBottom<HTMLDivElement>();
