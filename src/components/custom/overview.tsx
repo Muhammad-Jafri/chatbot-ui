@@ -19,9 +19,9 @@ export const Overview = () => {
           <MessageCircle size={44}/>
         </p>
         <p>
-          Welcome to <strong>Luna-AI ✨</strong><br />
-          a premium jewellery store that blends<br />
-          <strong>classic charm</strong> with <strong>contemporary style</strong>.
+          Welcome to <strong>HoH Digital Buddy</strong><br />
+          Your friendly virtual assistant<br />
+
         </p>
       </div>
     </motion.div>

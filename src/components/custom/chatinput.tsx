@@ -15,14 +15,14 @@ interface ChatInputProps {
 
 const suggestedActions = [
     {
-        title: 'price of',
-        label: 'Arya Choker',
-        action: 'price of Arya Choker?',
+        title: 'I want to know the',
+        label: 'procedure for retiring benefit fund',
+        action: 'I want to know the procedure for retiring benefit fund',
     },
     {
-        title: 'I am looking for a',
-        label: 'gift for my wife',
-        action: 'I am looking for a gift for my wife',
+        title: 'What is the procedure',
+        label: 'of posting a job internally',
+        action: 'What is the procedure of posting a job internally',
     },
 ];
 
