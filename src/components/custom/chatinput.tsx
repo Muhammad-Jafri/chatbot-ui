@@ -15,14 +15,14 @@ interface ChatInputProps {
 
 const suggestedActions = [
     {
-        title: 'I want to know the',
-        label: 'procedure for retiring benefit fund',
-        action: 'I want to know the procedure for retiring benefit fund',
+        title: 'Am I',
+        label: 'eligible for promotion?',
+        action: 'Am I eligible for promotion?',
     },
     {
-        title: 'What is the procedure',
-        label: 'of posting a job internally',
-        action: 'What is the procedure of posting a job internally',
+        title: 'Maternal leave',
+        label: 'ki policy kya hai?',
+        action: 'Maternal leave ki policy kya hai?',
     },
 ];
 
