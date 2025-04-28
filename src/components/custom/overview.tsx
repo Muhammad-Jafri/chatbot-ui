@@ -19,8 +19,8 @@ export const Overview = () => {
           <MessageCircle size={44}/>
         </p>
         <p>
-          Welcome to <strong>HoH Digital Buddy</strong><br />
-          Your friendly virtual assistant<br />
+          Welcome to <strong>TE’s Digital HR Assistant</strong><br />
+          Prototype for policy lookup—chats are logged; keep queries professional.<br />
 
         </p>
       </div>
