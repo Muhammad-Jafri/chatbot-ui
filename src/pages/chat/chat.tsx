@@ -8,11 +8,8 @@ import { Overview } from "@/components/custom/overview";
 import { Header } from "@/components/custom/header";
 import { v4 as uuidv4 } from 'uuid';
 
-// const post_endpoint = 'https://hohbot.duckdns.org/agent/chat'; // TODO resolve the endpoint issue
-// const ws_endpoint = 'wss://hohbot.duckdns.org/agent/chat/stream'; // Make sure this is correct
-
-const post_endpoint = 'https://hohbot.duckdns.org/agent/chat';
-const ws_endpoint = 'wss://hohbot.duckdns.org/agent/chat/stream';
+const post_endpoint = 'https://whiteduckai.duckdns.org/agent/chat'; // TODO resolve the endpoint issue
+const ws_endpoint = 'wss://whiteduckai.duckdns.org/agent/chat/stream'; // Make sure this is correct
 
 export function Chat() {
   const [messagesContainerRef, messagesEndRef] = useScrollToBottom<HTMLDivElement>();

@@ -15,14 +15,14 @@ interface ChatInputProps {
 
 const suggestedActions = [
     {
-        title: 'Am I',
-        label: 'eligible for promotion?',
-        action: 'Am I eligible for promotion?',
+        title: 'What is ',
+        label: 'your return policy',
+        action: 'What is your return policy',
     },
     {
-        title: 'Maternal leave',
-        label: 'ki policy kya hai?',
-        action: 'Maternal leave ki policy kya hai?',
+        title: 'What can',
+        label: 'you help me with',
+        action: 'What can you help me with',
     },
 ];
 
