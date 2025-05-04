@@ -15,14 +15,14 @@ interface ChatInputProps {
 
 const suggestedActions = [
     {
-        title: 'What is ',
-        label: 'your return policy',
-        action: 'What is your return policy',
+        title: 'What are the different',
+        label: 'shipping methods use this question for white duck',
+        action: 'What are the different shipping methods use this question for white duck',
     },
     {
-        title: 'What can',
-        label: 'you help me with',
-        action: 'What can you help me with',
+        title: 'I am planning to go to some rugged mountains. ',
+        label: 'What essentials should I have',
+        action: 'I am planning to go to some rugged mountains. What essentials should I have',
     },
 ];
 
