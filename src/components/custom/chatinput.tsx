@@ -16,8 +16,8 @@ interface ChatInputProps {
 const suggestedActions = [
     {
         title: 'What are the different',
-        label: 'shipping methods use this question for white duck',
-        action: 'What are the different shipping methods use this question for white duck',
+        label: 'shipping methods',
+        action: 'What are the different shipping methods',
     },
     {
         title: 'I am planning to go to some rugged mountains. ',
