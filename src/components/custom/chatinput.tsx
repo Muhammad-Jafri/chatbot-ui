@@ -15,9 +15,9 @@ interface ChatInputProps {
 
 const suggestedActions = [
     {
-        title: 'Am I',
-        label: 'eligible for promotion?',
-        action: 'Am I eligible for promotion?',
+        title: 'What is the',
+        label: 'Laptop Policy?',
+        action: 'What is the Laptop Policy?',
     },
     {
         title: 'Maternal leave',
